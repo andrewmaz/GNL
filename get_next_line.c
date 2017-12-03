@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 13:32:14 by amazurok          #+#    #+#             */
-/*   Updated: 2017/12/02 18:07:36 by amazurok         ###   ########.fr       */
+/*   Updated: 2017/12/03 16:50:04 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,37 @@
 char	*ft_realloc(char *str, int size)
 {
 	char *nstr;
+	
 
 	if (!(nstr = (char*)malloc(sizeof(char) * size)))
 		return (NULL);
+		
 	if (!(nstr = ft_strnew(size)))
 		return (NULL);
-	ft_memcpy(nstr, str, --size);
 	if (str)
+	{
+		ft_strcpy(nstr, str);
 		free(str);
+	}
 	return (nstr);
 }
 
-char *ft_stradd_end(char *f, char *end, int size)
+t_list *ft_add2list(t_list **list, size_t fd)
 {
-	int i;
-	int j;
-	char *str;
+	t_list *lst;
 
-	j = 0;
-	i = 0;
-	if(!f)
-	{
-		str = ft_strnew(size);
-	}
+	lst = *list;
+	if (!lst)
+		return (ft_lstnew("", fd));
+	while (lst->next && lst->content_size != fd)
+		lst = lst->next;
+	if (lst->content_size == fd)
+		return (lst);
 	else
 	{
-		str = ft_strnew(size + ft_strlen(f));
-		while (f[i])
-			str[i] = f[i++];
-		while (j < size)
-			str[i++] = end[j++];
+		lst->next = ft_lstnew("", fd);
+		return (lst->next);
 	}
-	return (str);
 }
 
 int get_next_line(const int fd, char **line)
@@ -54,13 +53,32 @@ int get_next_line(const int fd, char **line)
 	static t_list *qwe;
 	int ret;
 	char buf[BUFF_SIZE + 1];
+	int size;
 	int i;
 
-	i = 1;
-	qwe = ft_lstadd_end(*);
-	while(ret = read(fd, buf, BUFF_SIZE))
+	size = 0;
+	i = 0;
+	if ((fd < 0 || line == NULL || read(fd, buf, 0) < 0))
+		return (-1);
+	qwe = ft_add2list(&qwe, (size_t)fd);
+	while((ret = read(fd, buf, BUFF_SIZE)))
 	{
-		qwe->content = ft_stradd_end(qwe->content, buf, ret))
-
+		buf[ret] = '\0';
+		size += ret;		
+		qwe->content = ft_realloc(qwe->content, size);
+		qwe->content = ft_strcat(((char*)qwe->content), buf);
 	}
+	while (((char*)qwe->content)[i] != '\n' && ((char*)qwe->content)[i])
+		i++;
+	if (i)
+	{
+		*line = ft_strsub(qwe->content, 0, i);
+		if (((char*)qwe->content)[i] == '\n')
+			qwe->content = ft_strchr(qwe->content, '\n') + 1;
+		else
+			ft_strclr(qwe->content);
+		return (1);
+	}
+	else
+		return (0);
 }
