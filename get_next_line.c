@@ -6,12 +6,12 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 13:32:14 by amazurok          #+#    #+#             */
-/*   Updated: 2017/12/04 16:12:00 by amazurok         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:39:43 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+#include <stdio.h>
 char	*ft_realloc(char *str, int size)
 {
 	char *nstr;
@@ -19,7 +19,8 @@ char	*ft_realloc(char *str, int size)
 	if (!(nstr = ft_strnew(size)))
 		return (NULL);
 	ft_strcpy(nstr, str);
-	free(str);
+	if (str && ft_strlen(str))
+		free(str);
 	return (nstr);
 }
 
