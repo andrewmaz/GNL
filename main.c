@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:11:14 by amazurok          #+#    #+#             */
-/*   Updated: 2017/12/04 16:26:37 by amazurok         ###   ########.fr       */
+/*   Updated: 2017/12/06 19:28:16 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,27 @@ int        main(int argc, char **argv)
 {
     int        fd0;
     int        fd1;
-    int        fd2;
+    //int        fd2;
     char    *line;
 
     if (argc == 1)
         fd0 = 0;
     fd1 = open(argv[1], O_RDONLY);
-    fd2 = open(argv[2], O_RDONLY);
+    //fd2 = open(argv[2], O_RDONLY);
     
-    /*while (get_next_line(fd, &line) == 1)
+    while (get_next_line(fd1, &line) == 1)
     {
         ft_putendl(line);
         free(line);
-    }*/
+    }
+    
+    /*get_next_line(fd1, &line);
+    printf("main line 1 %s\n", line);
+    ft_strclr(line);
+    free(line);
     get_next_line(fd1, &line);
     printf("main line 1 %s\n", line);
-    get_next_line(fd1, &line);
-    printf("main line 1 %s\n", line);
-    /*get_next_line(fd2, &line);
+    get_next_line(fd2, &line);
     printf("main line 2 %s\n", line);
     get_next_line(fd1, &line);
     printf("main line 1 %s\n", line);
