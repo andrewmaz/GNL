@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 13:32:14 by amazurok          #+#    #+#             */
-/*   Updated: 2017/12/07 18:21:37 by amazurok         ###   ########.fr       */
+/*   Updated: 2017/12/07 18:36:18 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,6 @@ char	*ft_realloc(char *str, int size)
 	return (nstr);
 }
 
-t_list *ft_newlst(int fd)
-{
-	t_list *lst;
-
-	if (!(lst = (t_list*)malloc(sizeof(t_list))))
-		return (NULL);
-	lst->content_size = fd;
-	lst->content = NULL;
-	lst->next = NULL;
-	return (lst);
-}
-
 t_list *ft_add2list(t_list **list, size_t fd)
 {
 	t_list *lst;
@@ -45,7 +33,9 @@ t_list *ft_add2list(t_list **list, size_t fd)
 	lst = *list;
 	if (!(*list))
 	{
-		*list = ft_newlst(fd);
+		*list = ft_lstnew("", fd);
+		free((*list)->content);
+		(*list)->content = NULL;
 		return (*list);
 	}
 	while (lst->next && lst->content_size != fd)
@@ -54,7 +44,9 @@ t_list *ft_add2list(t_list **list, size_t fd)
 		return (lst);
 	else
 	{
-		lst->next = ft_newlst(fd);
+		lst->next = ft_lstnew("", fd);
+		free((lst->next)->content);
+		(lst->next)->content = NULL;
 		return (lst->next);
 	}
 }
