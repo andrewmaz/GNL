@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:11:14 by amazurok          #+#    #+#             */
-/*   Updated: 2017/12/06 19:28:16 by amazurok         ###   ########.fr       */
+/*   Updated: 2017/12/07 18:04:52 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int        main(int argc, char **argv)
     fd1 = open(argv[1], O_RDONLY);
     //fd2 = open(argv[2], O_RDONLY);
     
+
     while (get_next_line(fd1, &line) == 1)
     {
         ft_putendl(line);

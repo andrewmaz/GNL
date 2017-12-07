@@ -37,6 +37,7 @@ int				main(void)
 			printf("-> must have returned '1' and read line #1 \"The getdelim() function reads a line from stream, delimited by the character\" from file %s\n", filename1);
 			errors++;
 		}
+	printf("qwe\n");
 
 		ret1 = get_next_line(fd1, &line1);
 		if (ret1 != 1 || strcmp(line1, "delimiter.  The getline() function is equivalent to getdelim() with the new-") != 0)
@@ -44,6 +45,7 @@ int				main(void)
 			printf("-> must have returned '1' and read line #2 \"delimiter.  The getline() function is equivalent to getdelim() with the new-\" from file %s\n", filename1);
 			errors++;
 		}
+	printf("qwe\n");
 
 		ret1 = get_next_line(fd1, &line1);
 		if (ret1 != 1 || strcmp(line1, "line character as the delimiter.  The delimiter character is included as") != 0)
@@ -72,6 +74,7 @@ int				main(void)
 			printf("-> must have returned '1' and read line #2 \"The festival concentrates on classical music and jazz with about 150 events, including opera, concerts, films, and talks. \" from file %s\n", filename2);
 			errors++;
 		}
+	printf("qwe\n");
 
 		ret2 = get_next_line(fd2, &line2);
 		if (ret2 != 1 || strcmp(line2, "Most of these events are free and are held in the historic courtyards of the city or in the modern concert halls of Le Corum. ") != 0)
@@ -95,6 +98,8 @@ int				main(void)
 		}
 
 		ret1 = get_next_line(fd1, &line1);
+	printf("qwe1234 %s\n", line1);
+
 		if (ret1 != 1 || strcmp(line1, "") != 0)
 		{
 			printf("-> must have returned '1' and read line #5 \"\" from file %s\n", filename1);
